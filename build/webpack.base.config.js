@@ -46,6 +46,20 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        use: isProd
+            ? ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: { minimize: true }
+            },
+          ],
+          fallback: 'vue-style-loader'
+        })
+            : ['vue-style-loader', 'css-loader']
+      },
+      {
         test: /\.styl(us)?$/,
         use: isProd
           ? ExtractTextPlugin.extract({
